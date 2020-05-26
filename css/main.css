@@ -67,6 +67,14 @@ form {
 .btn.create:hover {
   opacity: 0.7; }
 
+.btn.delete {
+  opacity: 0.7;
+  font-size: 1rem;
+  transition: color 200ms; }
+
+.btn.delete:hover {
+  color: var(--clr-warning); }
+
 .new {
   background: transparent;
   border: 0;
@@ -74,6 +82,7 @@ form {
   border-bottom: 1px solid currentColor;
   font-size: inherit;
   outline: none;
+  padding: 0.25em;
   transition: broder-bottom 150ms ease-in;
   order: 2; }
 
@@ -84,10 +93,16 @@ form {
   color: var(--clr-light); }
 
 .new:focus::placeholder {
-  opacity: 0.2; }
+  opacity: 0.15; }
+
+.new::placeholder {
+  opacity: 0.4; }
 
 .new.list {
   font-size: 1.1rem; }
+
+.new.task {
+  margin-bottom: 0; }
 
 .active-list {
   font-weight: 700; }
@@ -113,27 +128,34 @@ form {
   font-size: 1rem; }
 
 .todo-body {
+  position: relative;
   padding: var(--spacer); }
+
+.new-task-creator .create {
+  color: var(--clr-primary); }
 
 [type="checkbox"] {
   opacity: 0;
   position: absolute; }
 
 .task label {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  position: relative;
-  margin-bottom: 1.25em; }
+  position: relative; }
 
-.task label::after {
+.task::after {
   content: "";
   position: absolute;
   right: 0;
   left: 0;
-  bottom: -50%;
+  bottom: -0.5em;
   height: 1px;
   background: currentColor;
   opacity: 0.1; }
+
+.task {
+  position: relative;
+  margin-bottom: 1.25em; }
 
 .custom-checkbox {
   --size: 0.75em;
@@ -162,3 +184,39 @@ form {
   background: var(--clr-primary);
   border-color: var(--clr-primary);
   box-shadow: inset 0 0 0 3px white; }
+
+[type='checkbox']:checked + label {
+  opacity: 0.5; }
+
+.task label::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 1.5em;
+  height: 3px;
+  background: currentColor;
+  -webkit-transform: scaleX(0);
+  -moz-transform: scaleX(0);
+  -ms-transform: scaleX(0);
+  -o-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: transform 150ms ease-in-out;
+  -moz-transition: transform 150ms ease-in-out;
+  -ms-transition: transform 150ms ease-in-out;
+  -o-transition: transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out;
+  transform-origin: right; }
+
+[type='checkbox']:checked + label::after {
+  transform: scaleX(1);
+  transform-origin: left; }
+
+.delete-task {
+  display: flex;
+  justify-content: space-evenly;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: -35px;
+  color: var(--clr-light); }
