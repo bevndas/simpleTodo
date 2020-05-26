@@ -3,6 +3,12 @@ const listsContainer = document.querySelector('[data-lists]');
 const newListForm = document.querySelector('[data-new-list-form]')
 const newListInput = document.querySelector('[data-new-list-input]')
 const deleteListBtn = document.querySelector('[data-delete-list-button]');
+const listDisplayContainer = document.querySelector('[data-list-display-container]');
+const listTitleElement = document.querySelector('[data-list-title]');
+const listCountElement = document.querySelector('[data-list-count]');
+const taskContainer = document.querySelector('[data-tasks]');
+const taskTemplate = document.getElementById('task-template');
+
 
 const LOCAL_STORAGE_LIST_KEY = 'task.lists';
 const LOCAL_STORAGE_SELECTED_LIST_ID_KEY = 'task.selectedListId';
@@ -39,6 +45,28 @@ function save() {
 }
 function render() {
     clearElement(listsContainer);
+    renderList();
+    if (selectedListId == null) {
+        listDisplayContainer.style.display = 'none';
+    }else {
+        const selectedList = lists.find(list => list.id === selectedListId);
+        listDisplayContainer.style.display = '';
+        listTitleElement.innerText = selectedList.name;
+        renderTaskCount(selectedList);
+        clearElement(tasksContainer);
+        renderTasks(selectedList);
+
+    }
+}
+function renderTasks(list) {
+
+}
+function renderTaskCount(list) {
+    const incompleteTasksCount = selectedList.tasks.filter(task => !task.complete).length;
+    const taskString = incompleteTasksCount === 1? "task": "tasks";
+    listCountElement.innerText = `${incompleteTasksCount} ${taskString} remaining`;
+}
+function renderList() {
     lists.forEach(list => {
         const listElement = document.createElement('li');
         listElement.dataset.listId = list.id

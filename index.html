@@ -26,13 +26,13 @@
             <button class="btn create" aria-label="create new list">+</button>
         </form>
     </div>
-    <div class="todo-list">
+    <div class="todo-list" data-list-display-container>
         <div class="todo-header">
-            <h2 class="list-title">Youtube</h2>
-            <p class="task-count">3 tasks remaining</p>
+            <h2 class="list-title" data-list-title>Youtube</h2>
+            <p class="task-count" data-list-count>3 tasks remaining</p>
         </div>
         <div class="todo-body">
-            <div class="tasks">
+            <div class="tasks" data-tasks>
                 <div class="task">
                     <input type="checkbox"
                             id="task-1"/>
@@ -77,5 +77,14 @@
             </div>
         </div>
     </div>
+<template id="task-template">
+    <div class="task">
+        <input type="checkbox"/>
+        <label>
+            <span class="custom-checkbox"></span>
+            record todo list video
+        </label>
+    </div>
+</template>
 </body>
 </html>
